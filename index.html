@@ -1,97 +1,43 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Raksha Bandhan!</title>
+  <title>Happy Raksha Bandhan, Chetna!</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #ffe6ec, #fff5d7);
       text-align: center;
-      padding: 40px;
+      padding: 30px;
       color: #4a2f2f;
     }
-
     h1 {
       font-size: 36px;
       color: #b23c83;
     }
-
     p {
       font-size: 18px;
       margin-bottom: 20px;
     }
-
-    .click-name {
-      font-weight: bold;
-      color: #d63384;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Slideshow Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 80%;
-      margin: 100px auto;
-      display: block;
+    img {
+      width: 90%;
+      max-width: 500px;
       border-radius: 10px;
-      box-shadow: 0 0 20px #000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin: 20px auto;
+      display: block;
     }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: #fff;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 40px;
-      color: #fff;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .prev { left: 10px; }
-    .next { right: 10px; }
   </style>
 </head>
 <body>
 
-  <h1>💖 Happy Raksha Bandhan!</h1>
-  <p>
-    Dear <span class="click-name" onclick="openModal()">DON</span>,
-    <br>
-    Click your name to see a little surprise! 🎁
-  </p>
-
-  <p>
-    Wishing you a lifetime of happiness, laughter, and love. Thank you for always being there. 👫💕
-  </p>
+  <h1>💖 Happy Raksha Bandhan, Chetna! 💫</h1>
+  <p>Wishing you all the happiness, laughter, and love in the world.</p>
+  <p>Thank you for being such a wonderful sister. 💐</p>
   <p>— With love, [Your Name]</p>
 
-  <!-- Modal -->
-  <div id="myModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="slideImage" />
-    <span class="nav prev" onclick="changeSlide(-1)">&#10094;</span>
-    <span class="nav next" onclick="changeSlide(1)">&#10095;</span>
-  </div>
+  <img id="slideshow" src="image1.jpg" alt="Raksha Bandhan Memories">
 
   <script>
     const images = [
@@ -100,28 +46,14 @@
       'pexels-pixabay-56866.jpg'
     ];
 
-    let slideIndex = 0;
 
-    function openModal() {
-      document.getElementById("myModal").style.display = "block";
-      showSlide(slideIndex);
-    }
+    let index = 0;
+    const slide = document.getElementById("slideshow");
 
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
-
-    function showSlide(index) {
-      const img = document.getElementById("slideImage");
-      if (index >= images.length) slideIndex = 0;
-      else if (index < 0) slideIndex = images.length - 1;
-      else slideIndex = index;
-      img.src = images[slideIndex];
-    }
-
-    function changeSlide(n) {
-      showSlide(slideIndex + n);
-    }
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      slide.src = images[index];
+    }, 2500); // 2.5 seconds per image
   </script>
 
 </body>
