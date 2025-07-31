@@ -2,170 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Raksha Bandhan, Chetna!</title>
+  <title>Surprise for You 💝</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow: hidden;
       text-align: center;
-      color: #6b2c5e;
-      overflow-x: hidden;
+      background: linear-gradient(270deg, #ff99cc, #ffcccc);
+      background-size: 400% 400%;
+      animation: bgMove 12s ease infinite;
     }
 
-    .container {
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .screen {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,182,193,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hidden {
+      display: none;
     }
 
     h1 {
-      font-size: 40px;
-      color: #b41668;
-      margin-bottom: 15px;
-      animation: popIn 1s ease-out;
+      font-size: 3em;
+      text-shadow: 0 0 8px #fff;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
 
-    p {
-      font-size: 18px;
-      margin: 10px 0;
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff; }
+      to { text-shadow: 0 0 20px #ffe4e1, 0 0 25px #ff69b4; }
     }
 
-    #slideshow-container {
+    button {
+      padding: 1em 2em;
+      font-size: 1.2em;
+      margin-top: 2rem;
+      background-color: white;
+      color: #ff69b4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #fff0f5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .main-content {
+      padding: 2rem;
+      animation: fadeIn 3s ease-in;
       position: relative;
-      width: 320px;
-      height: 420px;
-      margin: 40px auto 20px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
-      background-color: #fff;
     }
 
-    #slideshow {
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 2rem;
+    }
+
+    .gallery div {
+      max-width: 220px;
+      opacity: 0;
+      animation: imageReveal 3s forwards;
+    }
+
+    .gallery div:nth-child(1) { animation-delay: 0.5s; }
+    .gallery div:nth-child(2) { animation-delay: 1s; }
+    .gallery div:nth-child(3) { animation-delay: 1.5s; }
+
+    @keyframes imageReveal {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(20px); }
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .gallery p {
+      font-size: 1em;
+      margin-top: 0.5em;
+      color: #fff;
+      background-color: rgba(255, 192, 203, 0.3);
+      padding: 0.5em;
+      border-radius: 8px;
+    }
+
+    .hearts, .stars {
+      position: fixed;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.05);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-      border-radius: 12px;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
     }
 
-    .quote {
-      font-style: italic;
-      font-size: 16px;
-      color: #7a4d4d;
-      margin-top: 10px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      min-height: 40px;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #9a5a5a;
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Floating animated bubbles */
-    .bubble {
+    .heart {
       position: absolute;
+      color: red;
+      font-size: 2em;
+      animation: rise 8s infinite ease-in;
+    }
+
+    @keyframes rise {
+      from { bottom: -50px; opacity: 0; }
+      to { bottom: 100%; opacity: 1; }
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
       border-radius: 50%;
-      background: rgba(255, 182, 193, 0.3);
-      animation: float 10s infinite ease-in-out;
-      z-index: 0;
+      animation: twinkle 2s infinite ease-in-out;
     }
 
-    .bubble:nth-child(1) {
-      width: 80px; height: 80px;
-      top: 10%; left: 5%;
-      animation-delay: 0s;
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
     }
-
-    .bubble:nth-child(2) {
-      width: 60px; height: 60px;
-      top: 30%; right: 10%;
-      animation-delay: 2s;
-    }
-
-    .bubble:nth-child(3) {
-      width: 100px; height: 100px;
-      bottom: 10%; left: 20%;
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
   </style>
 </head>
 <body>
+  <div class="screen" id="welcomeScreen">
+    <h1>✨ Surprise for You ✨</h1>
+    <button onclick="showMain()">Open Your Surprise 🎀</button>
+  </div>
 
-  <!-- Floating background effects -->
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-
-  <div class="container">
-    <h1>🎀 Happy Raksha Bandhan, Chetna! 💫</h1>
-    <p>To the one who fills my life with color and kindness 🌸</p>
-    <p>Thank you for being the best sister in the world!</p>
-    <p>— With love, [Your Name]</p>
-
-    <div id="slideshow-container">
-      <img id="slideshow" src="pexels-webbshow-2406387.jpg" alt="Memories with Chetna">
+  <div class="main-content hidden" id="mainPage">
+    <div class="hearts">
+      <div class="heart" style="left:10%;">❤️</div>
+      <div class="heart" style="left:30%;">💖</div>
+      <div class="heart" style="left:50%;">💗</div>
+      <div class="heart" style="left:70%;">💞</div>
+      <div class="heart" style="left:90%;">💕</div>
     </div>
-    <div class="quote" id="quote"></div>
+    <div class="stars">
+      <div class="star" style="top:10%; left:15%;"></div>
+      <div class="star" style="top:25%; left:60%;"></div>
+      <div class="star" style="top:40%; left:30%;"></div>
+      <div class="star" style="top:55%; left:75%;"></div>
+      <div class="star" style="top:70%; left:20%;"></div>
+      <div class="star" style="top:85%; left:50%;"></div>
+    </div>
 
-    <footer>Made with 💖 just for you on this special Rakhi</footer>
+    <h1>To My Sweetest Sister 💕</h1>
+    <p style="font-size:1.2em;">You're a sparkle in my world, and this page is my little love letter to you.</p>
+    <p style="font-size:1.2em;">Here are some moments I cherish:</p>
+
+    <div class="gallery">
+      <div>
+        <img src="pexels-webbshow-2406387.jpg" alt="Memory 1">
+        <p>🌟 “Sisters may fight, but they will always be best friends at heart.”</p>
+      </div>
+      <div>
+        <img src="pexels-anhdanghihi-16446080.jpg" alt="Memory 2">
+        <p>🌸 “You bring magic to ordinary days.”</p>
+      </div>
+      <div>
+        <img src="pexels-pixabay-56866.jpg" alt="Memory 3">
+        <p>💫 “With you, every adventure becomes unforgettable.”</p>
+      </div>
+    </div>
+
+    <p style="font-size:1.2em; margin-top:2rem;">Hope this made you smile 🌈✨</p>
   </div>
 
   <script>
-    const slides = [
-      {
-        src: 'pexels-webbshow-2406387.jpg',
-        quote: '“Sisters are the spark in your soul and the heart in your home.”'
-      },
-      {
-        src: 'pexels-anhdanghihi-16446080.jpg',
-        quote: '“She’s your mirror — shining back at you with a world of possibilities.”'
-      },
-      {
-        src: 'pexels-pixabay-56866.jpg',
-        quote: '“Even when we’re miles apart, our hearts beat together.”'
-      }
-    ];
-
-    let index = 0;
-    const image = document.getElementById("slideshow");
-    const quote = document.getElementById("quote");
-
-    function showSlide(i) {
-      image.style.opacity = 0;
-      quote.style.opacity = 0;
-      setTimeout(() => {
-        image.src = slides[i].src;
-        quote.textContent = slides[i].quote;
-        image.style.opacity = 1;
-        quote.style.opacity = 1;
-      }, 500);
+    function showMain() {
+      document.getElementById("welcomeScreen").classList.add("hidden");
+      document.getElementById("mainPage").classList.remove("hidden");
     }
-
-    showSlide(index);
-    setInterval(() => {
-      index = (index + 1) % slides.length;
-      showSlide(index);
-    }, 3000);
   </script>
-
 </body>
 </html>
