@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Surprise for You 💝</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
@@ -16,7 +16,6 @@
       animation: bgMove 20s ease infinite;
       overflow: hidden;
     }
-
 
     @keyframes bgMove {
       0% {
@@ -54,6 +53,7 @@
       font-size: 2.2em;
       text-shadow: 0 0 8px #fff;
       animation: glow 1.5s ease-in-out infinite alternate;
+      margin-bottom: 0.3em;
     }
 
     @keyframes glow {
@@ -76,6 +76,7 @@
       border-radius: 8px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -109,7 +110,6 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 
-
     .quote {
       font-size: 1em;
       margin-top: 0.8em;
@@ -120,10 +120,19 @@
       color: #fffefc;
       text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: quoteFadeIn 1.5s ease forwards;
+    }
+
+    @keyframes quoteFadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     .hearts,
-    .stars {
+    .stars,
+    .floating-emojis {
       position: fixed;
       width: 100%;
       height: 100%;
@@ -161,7 +170,6 @@
     }
 
     @keyframes twinkle {
-
       0%,
       100% {
         opacity: 0.3;
@@ -169,6 +177,33 @@
 
       50% {
         opacity: 1;
+      }
+    }
+
+    /* Floating emojis animation */
+    .floating-emojis span {
+      position: absolute;
+      font-size: 1.5em;
+      animation-name: floatUpDown;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes floatUpDown {
+      0% {
+        transform: translateY(0);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translateY(-20px);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 0.7;
       }
     }
 
@@ -187,18 +222,10 @@
         height: auto;
       }
 
-      /* .slide img {
-        width: 100%;
-        height: auto;
-        max-height: 220px;
-      } */
       .slide img {
         max-height: 220px;
       }
 
-      /* .quote {
-        font-size: 0.95em;
-      } */
       .quote {
         font-size: 1em;
         padding: 0.8em 1em;
@@ -206,11 +233,28 @@
         max-width: 90%;
       }
     }
+
+    /* Intro text styling */
+    .intro {
+      font-size: 1.1em;
+      margin: 0.1em 0;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      color: #4a0035;
+      text-shadow: 0 0 5px rgba(255, 182, 193, 0.7);
+    }
+
+    .emoji-line {
+      font-size: 1.5em;
+      margin: 1em 0;
+      color: #ff69b4;
+      text-shadow: 0 0 8px #ff85a2;
+    }
   </style>
 </head>
 
 <body>
-
   <!-- Welcome Screen -->
   <div class="screen" id="welcomeScreen">
     <h1>✨ Surprise for You ✨</h1>
@@ -234,12 +278,17 @@
       <div class="star" style="top:70%; left:20%;"></div>
       <div class="star" style="top:85%; left:50%;"></div>
     </div>
+    <div class="floating-emojis">
+      <span style="left: 20%; animation-delay: 0s;">✨</span>
+      <span style="left: 40%; animation-delay: 1.5s;">🌸</span>
+      <span style="left: 60%; animation-delay: 3s;">💫</span>
+      <span style="left: 80%; animation-delay: 4.5s;">🌟</span>
+    </div>
 
     <h1>To My Sweetest Sister 💕</h1>
-    <p style="font-size:1.1em;">You're a sparkle in Our world, and this page is a celebration of the beautiful bond we
-      share.</p>
-    <!-- <p style="font-size:1.1em;">Here are some moments I cherish:</p> -->
-    <p style="font-size:1.5em; margin: 1em 0;">💖 💫 💝 💫 💖</p>
+    <p class="intro">You're a sparkle in our world, and this page is a celebration of the beautiful bond we share.</p>
+    <p class="intro">Here are some moments we cherish together:</p>
+    <p class="emoji-line">💖 💫 💝 💫 💖</p>
 
     <div class="slide" id="slideshow">
       <!-- Image & quote will appear here -->
@@ -248,11 +297,9 @@
     <p style="font-size:1em; margin-top:2rem;" id="endMsg" class="hidden">Hope this made you smile 🌈✨</p>
 
     <!-- Background music -->
-    <!-- Background music -->
     <audio id="bgMusic"
       src="https://raw.githubusercontent.com/shindesushant200/BDY/6f4dffcc85978585ad036a672d765df64e9b1eba/chetna/WhatsApp%20Audio%202025-08-06%20at%201.48.51%20PM.mpeg"
       autoplay loop></audio>
-
   </div>
 
   <script>
@@ -304,13 +351,8 @@
       {
         img: "DSC04531.JPG",
         quote: "🌟 “This bond we share is my favorite story.”"
-      }/* ,
-      {
-        img: "DSC04485.JPG",
-        quote: "💝 “You make my world warmer, softer, brighter.”"
-      } */
+      }
     ];
-
 
     let currentSlide = 0;
     let interval;
@@ -336,18 +378,17 @@
           document.getElementById("slideshow").classList.add("hidden");
           document.getElementById("endMsg").classList.remove("hidden");
         }
-      }, 3000); // change every 4 seconds
+      }, 4000); // changed to 4 seconds per slide for smoother reading
     }
 
     function showSlide(index) {
       const slideDiv = document.getElementById("slideshow");
       slideDiv.innerHTML = `
-        <img src="${slides[index].img}" alt="Memory ${index + 1}">
+        <img src="${slides[index].img}" alt="Memory ${index + 1}" />
         <p class="quote">${slides[index].quote}</p>
       `;
     }
   </script>
-
 </body>
 
 </html>
