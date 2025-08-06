@@ -10,6 +10,7 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
+      background: #ffb6c1; /* solid pink background fallback */
       background: linear-gradient(270deg, #ffb6c1, #ffc0cb, #ff69b4);
       background-size: 600% 600%;
       animation: bgMove 15s ease infinite;
@@ -72,14 +73,16 @@
     }
 
     .slide {
-      max-width: 90%;
-      width: 350px;
+      width: 300px;
+      height: 350px;
       margin: 1rem auto;
       animation: fadeIn 2s ease-in-out;
     }
 
     .slide img {
       width: 100%;
+      height: 250px;
+      object-fit: cover;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
@@ -87,9 +90,10 @@
     .quote {
       font-size: 1em;
       margin-top: 0.8em;
-      background-color: rgba(255, 192, 203, 0.4);
+      background-color: rgba(255, 192, 203, 0.6);
       padding: 0.8em;
       border-radius: 8px;
+      color: #fff;
     }
 
     .hearts, .stars {
@@ -129,12 +133,21 @@
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.8em;
+        font-size: 1.6em;
       }
 
       button {
         font-size: 1em;
         padding: 0.8em 1.5em;
+      }
+
+      .slide {
+        width: 90%;
+        height: auto;
+      }
+
+      .slide img {
+        height: 200px;
       }
 
       .quote {
@@ -174,10 +187,14 @@
     <p style="font-size:1.1em;">Here are some moments I cherish:</p>
 
     <div class="slide" id="slideshow">
-      <!-- Slideshow content goes here -->
+      <!-- Image & quote will appear here -->
     </div>
 
     <p style="font-size:1em; margin-top:2rem;" id="endMsg" class="hidden">Hope this made you smile 🌈✨</p>
+
+    <!-- Background music -->
+    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
+
   </div>
 
   <script>
@@ -202,6 +219,13 @@
     function startSlideshow() {
       document.getElementById("welcomeScreen").classList.add("hidden");
       document.getElementById("mainPage").classList.remove("hidden");
+
+      const music = document.getElementById("bgMusic");
+      music.play().catch(() => {
+        // In case autoplay fails, maybe require user gesture
+        console.log("Music play failed. Tap interaction might be required.");
+      });
+
       showSlide(currentSlide);
 
       interval = setInterval(() => {
@@ -213,7 +237,7 @@
           document.getElementById("slideshow").classList.add("hidden");
           document.getElementById("endMsg").classList.remove("hidden");
         }
-      }, 3500); // Change slide every 3.5 seconds
+      }, 4000); // change every 4 seconds
     }
 
     function showSlide(index) {
