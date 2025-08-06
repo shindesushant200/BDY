@@ -15,6 +15,8 @@
       background-size: 800% 800%;
       animation: bgMove 20s ease infinite;
       overflow: hidden;
+      position: relative;
+      height: 100vh;
     }
 
     @keyframes bgMove {
@@ -43,6 +45,7 @@
       padding: 1rem;
       box-sizing: border-box;
       animation: fadeIn 2s ease-in-out;
+      z-index: 10;
     }
 
     .hidden {
@@ -53,7 +56,6 @@
       font-size: 2.2em;
       text-shadow: 0 0 8px #fff;
       animation: glow 1.5s ease-in-out infinite alternate;
-      margin-bottom: 0.3em;
     }
 
     @keyframes glow {
@@ -76,7 +78,6 @@
       border-radius: 8px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -120,25 +121,16 @@
       color: #fffefc;
       text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      animation: quoteFadeIn 1.5s ease forwards;
-    }
-
-    @keyframes quoteFadeIn {
-      to {
-        opacity: 1;
-      }
     }
 
     .hearts,
-    .stars,
-    .floating-emojis {
+    .stars {
       position: fixed;
       width: 100%;
       height: 100%;
       pointer-events: none;
       overflow: hidden;
-      z-index: -1;
+      z-index: 5;
     }
 
     .heart {
@@ -180,30 +172,37 @@
       }
     }
 
-    /* Floating emojis animation */
+    /* NEW: Floating emojis container covers entire screen */
+    .floating-emojis {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
     .floating-emojis span {
       position: absolute;
-      font-size: 1.5em;
       animation-name: floatUpDown;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
       animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      user-select: none;
     }
 
     @keyframes floatUpDown {
       0% {
         transform: translateY(0);
-        opacity: 0.7;
       }
 
       50% {
-        transform: translateY(-20px);
-        opacity: 1;
+        transform: translateY(-15px);
       }
 
       100% {
         transform: translateY(0);
-        opacity: 0.7;
       }
     }
 
@@ -233,28 +232,11 @@
         max-width: 90%;
       }
     }
-
-    /* Intro text styling */
-    .intro {
-      font-size: 1.1em;
-      margin: 0.1em 0;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      color: #4a0035;
-      text-shadow: 0 0 5px rgba(255, 182, 193, 0.7);
-    }
-
-    .emoji-line {
-      font-size: 1.5em;
-      margin: 1em 0;
-      color: #ff69b4;
-      text-shadow: 0 0 8px #ff85a2;
-    }
   </style>
 </head>
 
 <body>
+
   <!-- Welcome Screen -->
   <div class="screen" id="welcomeScreen">
     <h1>✨ Surprise for You ✨</h1>
@@ -278,17 +260,11 @@
       <div class="star" style="top:70%; left:20%;"></div>
       <div class="star" style="top:85%; left:50%;"></div>
     </div>
-    <div class="floating-emojis">
-      <span style="left: 20%; animation-delay: 0s;">✨</span>
-      <span style="left: 40%; animation-delay: 1.5s;">🌸</span>
-      <span style="left: 60%; animation-delay: 3s;">💫</span>
-      <span style="left: 80%; animation-delay: 4.5s;">🌟</span>
-    </div>
 
     <h1>To My Sweetest Sister 💕</h1>
-    <p class="intro">You're a sparkle in our world, and this page is a celebration of the beautiful bond we share.</p>
-    <p class="intro">Here are some moments we cherish together:</p>
-    <p class="emoji-line">💖 💫 💝 💫 💖</p>
+    <p style="font-size:1.1em;">You're a sparkle in Our world, and this page is a celebration of the beautiful bond we
+      share.</p>
+    <p style="font-size:1.5em; margin: 1em 0;">💖 💫 💝 💫 💖</p>
 
     <div class="slide" id="slideshow">
       <!-- Image & quote will appear here -->
@@ -301,6 +277,9 @@
       src="https://raw.githubusercontent.com/shindesushant200/BDY/6f4dffcc85978585ad036a672d765df64e9b1eba/chetna/WhatsApp%20Audio%202025-08-06%20at%201.48.51%20PM.mpeg"
       autoplay loop></audio>
   </div>
+
+  <!-- Floating emojis container -->
+  <div class="floating-emojis"></div>
 
   <script>
     const slides = [
@@ -378,16 +357,35 @@
           document.getElementById("slideshow").classList.add("hidden");
           document.getElementById("endMsg").classList.remove("hidden");
         }
-      }, 4000); // changed to 4 seconds per slide for smoother reading
+      }, 3000); // change every 3 seconds
     }
 
     function showSlide(index) {
       const slideDiv = document.getElementById("slideshow");
       slideDiv.innerHTML = `
-        <img src="${slides[index].img}" alt="Memory ${index + 1}" />
+        <img src="${slides[index].img}" alt="Memory ${index + 1}">
         <p class="quote">${slides[index].quote}</p>
       `;
     }
+
+    // Floating emojis generation across entire screen
+    function createFloatingEmojis() {
+      const container = document.querySelector('.floating-emojis');
+      const emojis = ['✨', '🌸', '💫', '🌟', '💖', '💕', '🎀'];
+
+      for (let i = 0; i < 30; i++) {
+        const emojiSpan = document.createElement('span');
+        emojiSpan.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emojiSpan.style.left = Math.random() * 100 + '%';
+        emojiSpan.style.top = Math.random() * 100 + '%';
+        emojiSpan.style.fontSize = (Math.random() * 1 + 1) + 'em';
+        emojiSpan.style.animationDelay = (Math.random() * 5) + 's';
+        emojiSpan.style.animationDuration = (4 + Math.random() * 3) + 's';
+        container.appendChild(emojiSpan);
+      }
+    }
+
+    createFloatingEmojis();
   </script>
 </body>
 
