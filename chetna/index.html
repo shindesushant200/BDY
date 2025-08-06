@@ -10,14 +10,12 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       color: #2c002e;
-      /* deep plum for high contrast */
       text-align: center;
-      background: linear-gradient(270deg, #ffd1dc, #ffb6c1, #ff85a2, #ffa6c9);
+      background: linear-gradient(270deg, #ff4f81, #ff85a2, #ff66cc, #ff99aa);
       background-size: 800% 800%;
       animation: bgMove 20s ease infinite;
       overflow: hidden;
     }
-
 
 
     @keyframes bgMove {
@@ -115,10 +113,13 @@
     .quote {
       font-size: 1em;
       margin-top: 0.8em;
-      background-color: rgba(255, 192, 203, 0.6);
+      background-color: rgba(255, 105, 180, 0.85);
+      /* Stronger pink */
       padding: 0.8em;
       border-radius: 8px;
-      color: #fff;
+      color: #fffefc;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .hearts,
@@ -186,14 +187,23 @@
         height: auto;
       }
 
-      .slide img {
+      /* .slide img {
         width: 100%;
         height: auto;
         max-height: 220px;
+      } */
+      .slide img {
+        max-height: 220px;
       }
 
-      .quote {
+      /* .quote {
         font-size: 0.95em;
+      } */
+      .quote {
+        font-size: 1em;
+        padding: 0.8em 1em;
+        margin: 0.5em auto 0;
+        max-width: 90%;
       }
     }
   </style>
@@ -292,11 +302,11 @@
       {
         img: "DSC04531.JPG",
         quote: "🌟 “This bond we share is my favorite story.”"
-      },
+      }/* ,
       {
         img: "DSC04485.JPG",
         quote: "💝 “You make my world warmer, softer, brighter.”"
-      }
+      } */
     ];
 
 
