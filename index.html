@@ -1,60 +1,351 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Happy Raksha Bandhan, Chetna!</title>
+  <title>Surprise for You 💝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #ffe6ec, #fff5d7);
+      color: #2c002e;
       text-align: center;
-      padding: 30px;
-      color: #4a2f2f;
+      background: linear-gradient(270deg, #ff4f81, #ff85a2, #ff66cc, #ff99aa);
+      background-size: 800% 800%;
+      animation: bgMove 20s ease infinite;
+      overflow: hidden;
     }
+
+
+    @keyframes bgMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .screen,
+    .main-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 1rem;
+      box-sizing: border-box;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+
     h1 {
-      font-size: 36px;
-      color: #b23c83;
+      font-size: 2.2em;
+      text-shadow: 0 0 8px #fff;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff;
+      }
+
+      to {
+        text-shadow: 0 0 20px #ffe4e1, 0 0 25px #ff69b4;
+      }
     }
-    img {
-      width: 90%;
-      max-width: 500px;
+
+    button {
+      padding: 1em 2em;
+      font-size: 1.1em;
+      margin-top: 1.5rem;
+      background-color: white;
+      color: #ff69b4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background-color: #fff0f5;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      margin: 1rem auto;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      margin: 20px auto;
-      display: block;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
+
+    .quote {
+      font-size: 1em;
+      margin-top: 0.8em;
+      background-color: rgba(255, 105, 180, 0.85);
+      /* Stronger pink */
+      padding: 0.8em;
+      border-radius: 8px;
+      color: #fffefc;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hearts,
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 2em;
+      animation: rise 8s infinite ease-in;
+    }
+
+    @keyframes rise {
+      from {
+        bottom: -50px;
+        opacity: 0;
+      }
+
+      to {
+        bottom: 100%;
+        opacity: 1;
+      }
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6em;
+      }
+
+      button {
+        font-size: 1em;
+        padding: 0.8em 1.5em;
+      }
+
+      .slide {
+        width: 90%;
+        height: auto;
+      }
+
+      /* .slide img {
+        width: 100%;
+        height: auto;
+        max-height: 220px;
+      } */
+      .slide img {
+        max-height: 220px;
+      }
+
+      /* .quote {
+        font-size: 0.95em;
+      } */
+      .quote {
+        font-size: 1em;
+        padding: 0.8em 1em;
+        margin: 0.5em auto 0;
+        max-width: 90%;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <h1>💖 Happy Raksha Bandhan, Chetna! 💫</h1>
-  <p>Wishing you all the happiness, laughter, and love in the world.</p>
-  <p>Thank you for being such a wonderful sister. 💐</p>
-  <p>— With love, [Your Name]</p>
+  <!-- Welcome Screen -->
+  <div class="screen" id="welcomeScreen">
+    <h1>✨ Surprise for You ✨</h1>
+    <button onclick="startSlideshow()">Open Your Surprise 🎀</button>
+  </div>
 
-  <img id="slideshow" src="image1.jpg" alt="Raksha Bandhan Memories">
+  <!-- Main Slideshow Content -->
+  <div class="main-content hidden" id="mainPage">
+    <div class="hearts">
+      <div class="heart" style="left:10%;">❤️</div>
+      <div class="heart" style="left:30%;">💖</div>
+      <div class="heart" style="left:50%;">💗</div>
+      <div class="heart" style="left:70%;">💞</div>
+      <div class="heart" style="left:90%;">💕</div>
+    </div>
+    <div class="stars">
+      <div class="star" style="top:10%; left:15%;"></div>
+      <div class="star" style="top:25%; left:60%;"></div>
+      <div class="star" style="top:40%; left:30%;"></div>
+      <div class="star" style="top:55%; left:75%;"></div>
+      <div class="star" style="top:70%; left:20%;"></div>
+      <div class="star" style="top:85%; left:50%;"></div>
+    </div>
+
+    <h1>To My Sweetest Sister 💕</h1>
+    <p style="font-size:1.1em;">You're a sparkle in my world, and this page is my little love letter to you.</p>
+    <p style="font-size:1.1em;">Here are some moments I cherish:</p>
+
+    <div class="slide" id="slideshow">
+      <!-- Image & quote will appear here -->
+    </div>
+
+    <p style="font-size:1em; margin-top:2rem;" id="endMsg" class="hidden">Hope this made you smile 🌈✨</p>
+
+    <!-- Background music -->
+    <!-- Background music -->
+    <audio id="bgMusic"
+      src="https://raw.githubusercontent.com/shindesushant200/BDY/6f4dffcc85978585ad036a672d765df64e9b1eba/chetna/WhatsApp%20Audio%202025-08-06%20at%201.48.51%20PM.mpeg"
+      autoplay loop></audio>
+
+  </div>
 
   <script>
-    const images = [
-      'pexels-webbshow-2406387.jpg',
-      'pexels-anhdanghihi-16446080.jpg',
-      'pexels-pixabay-56866.jpg'
+    const slides = [
+      {
+        img: "Tai 20160126_174851.jpg",
+        quote: "💕 “Sisters – different flowers from the same garden.”"
+      },
+      {
+        img: "SPB02793.JPG",
+        quote: "💖 “Some moments are meant to be cherished forever.”"
+      },
+      {
+        img: "20180630_223340.jpg",
+        quote: "🌈 “Your smile makes everything brighter.”"
+      },
+      {
+        img: "Pranali Shinde 20160524_233926.jpg",
+        quote: "🌟 “We didn’t realize we were making memories, we just knew we were having fun.”"
+      },
+      {
+        img: "Tai 20180624_094747.jpg",
+        quote: "🌸 “Little moments with you mean the world to me.”"
+      },
+      {
+        img: "IMG-20210213-WA0083.jpg",
+        quote: "💫 “Wherever life plants you, bloom with love.”"
+      },
+      {
+        img: "IMG-20210213-WA0063.jpg",
+        quote: "🎀 “You are more beautiful than you know, stronger than you think.”"
+      },
+      {
+        img: "IMG-20180327-WA0035.jpg",
+        quote: "🌼 “Your presence is my comfort zone.”"
+      },
+      {
+        img: "DSC03293.JPG",
+        quote: "💐 “There’s no better friend than a sister… and no better sister than you.”"
+      },
+      {
+        img: "DSC04569.JPG",
+        quote: "🌻 “Joy is seeing you laugh with your whole heart.”"
+      },
+      {
+        img: "DSC04538.JPG",
+        quote: "🦋 “You’re not just my sister, you’re my forever friend.”"
+      },
+      {
+        img: "DSC04531.JPG",
+        quote: "🌟 “This bond we share is my favorite story.”"
+      }/* ,
+      {
+        img: "DSC04485.JPG",
+        quote: "💝 “You make my world warmer, softer, brighter.”"
+      } */
     ];
 
 
-    let index = 0;
-    const slide = document.getElementById("slideshow");
+    let currentSlide = 0;
+    let interval;
 
-    setInterval(() => {
-      index = (index + 1) % images.length;
-      slide.src = images[index];
-    }, 2500); // 2.5 seconds per image
+    function startSlideshow() {
+      document.getElementById("welcomeScreen").classList.add("hidden");
+      document.getElementById("mainPage").classList.remove("hidden");
+
+      const music = document.getElementById("bgMusic");
+      music.play().catch(() => {
+        // In case autoplay fails, maybe require user gesture
+        console.log("Music play failed. Tap interaction might be required.");
+      });
+
+      showSlide(currentSlide);
+
+      interval = setInterval(() => {
+        currentSlide++;
+        if (currentSlide < slides.length) {
+          showSlide(currentSlide);
+        } else {
+          clearInterval(interval);
+          document.getElementById("slideshow").classList.add("hidden");
+          document.getElementById("endMsg").classList.remove("hidden");
+        }
+      }, 3000); // change every 4 seconds
+    }
+
+    function showSlide(index) {
+      const slideDiv = document.getElementById("slideshow");
+      slideDiv.innerHTML = `
+        <img src="${slides[index].img}" alt="Memory ${index + 1}">
+        <p class="quote">${slides[index].quote}</p>
+      `;
+    }
   </script>
 
 </body>
+
 </html>
