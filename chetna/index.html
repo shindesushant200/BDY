@@ -252,13 +252,11 @@
     <p style="font-size:1.1em;" id="startQuote">You're a sparkle in Our world, and this page is a celebration of the beautiful bond we
       share.</p>
     <p style="font-size:1.5em; margin: 1em 0;"> 👫 🫶 💌 💖 </p>
-
     <div class="slide" id="slideshow"></div>
     <p style="font-size:1em; margin-top:2rem;" id="endMsg1" class="hidden">
       No slideshow could ever capture how much you mean to us. You are truly one of a kind. 💫💕
     </p>
     <p style="font-size:1em; margin-top:2rem;" id="endMsg" class="hidden">Hope this made you smile 🌈✨</p>
-    <p style="font-size:1.5em; margin: 1em 0;"> 👫 🫶 💌 💖 </p>
     <!-- Background music -->
     <audio id="bgMusic"
       src="https://raw.githubusercontent.com/shindesushant200/BDY/6f4dffcc85978585ad036a672d765df64e9b1eba/chetna/WhatsApp%20Audio%202025-08-06%20at%201.48.51%20PM.mpeg"
@@ -300,7 +298,8 @@
         } else {
           clearInterval(interval);
           document.getElementById("slideshow").classList.add("hidden");
-          document.getElementById("endMsg").classList.remove("hidden");
+          document.getElementById("startQuote").classList.add("hidden"); // hide the initial quote
+          document.getElementById("endMsg1").classList.remove("hidden");  // show the final quote
         }
       }, 3000);
     }
